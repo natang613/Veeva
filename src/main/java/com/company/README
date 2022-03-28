@@ -1,0 +1,36 @@
+Running instructions:
+To run the code you have to run the Main.main() method.
+You can put as arguments:
+    arg1 - the column key to sort by (int)
+    arg2 - the filepath of the csv file to run (XXXX.csv)
+    arg3 - the number of entries to enter into the memory at once (long)
+    arg4 - (optional) the output path.
+Please note the csv files should have no headers.
+If no input is given there are default samples that will run.
+    arg1 - 0
+    arg2 - DefaultFile.csv
+    arg3 - 10
+    arg4 - Output.csv
+Further note that if arguments are given (that is an option) they must be accurate and adhere to the rules.
+
+The return file is called output.csv and is stored in the same directory as the code.
+
+Samples:
+DefaultFile.csv -> outputDefault.csv
+DefaultFile1.csv -> output1.csv
+DefaultFile2.csv -> output2.csv
+
+Algorithm:
+1. I parse the file in chunks of data that could fit into the allocated memory
+2. I sort each chunk and save into a temporary file using quicksort to use O(1) memory
+3. I merge a chunk of temp files at a time and merge them into one file. The chunk equals the size of the allocated memory.
+The merge is done line by line comparing each files line to other lines of temp files and appending the lowest value to a new file.
+And reading the next line in this file.
+The result of 3 is that we have a sorted from the chunk of files. This is true because each file is in itself sorted
+thus allowing us to use the merge of merge sort on the files and have aone sorted file
+4. If all of the temp files did not enter the memory by one iteration of the files in  3 but more. We have temp files to merge and will run
+3 until this is not the case, but we can merge all of the temp files at once.
+5. The ouput is in Output.csv
+
+Time Complexity:
+O(nlogn) and there is no difference in terms of O(n) if multi threading is used
